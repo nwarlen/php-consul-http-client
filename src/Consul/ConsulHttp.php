@@ -43,8 +43,8 @@ class ConsulHttp implements ServiceDiscoveryClientInterface
         if (!empty($list)) {
             $item = $list[array_rand($list)];
             return "http://$item->ServiceAddress:$item->ServicePort";
-        } else {
-            throw new \Exception("Service: $serviceName not found.");
         }
+
+        return null;
     }
 }

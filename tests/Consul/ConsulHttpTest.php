@@ -67,10 +67,7 @@ class ConsulHttpTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->consulHttp->getServiceAddress($serviceName));
     }
 
-    /**
-     * @expectedException Exception
-     * @expectedExceptionMessage Service: foo-service not found.
-     */
+
     public function testGetServiceAddressFailure()
     {
         $serviceName = 'foo-service';
@@ -87,7 +84,7 @@ class ConsulHttpTest extends \PHPUnit_Framework_TestCase
             ->with("$this->consulAddress/v1/catalog/service/$serviceName?passing")
             ->willReturn($mockResponse);
 
-        $this->consulHttp->getServiceAddress($serviceName);
+        $this->assertNull($this->consulHttp->getServiceAddress($serviceName));
     }
 
     public function testGetServiceAddressWithVersion()
